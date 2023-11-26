@@ -1,4 +1,4 @@
-package ACSI.demo.brt;
+package ACSI.demo.REST.brt;
 
 import jakarta.persistence.*;
 

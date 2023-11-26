@@ -1,4 +1,4 @@
-package ACSI.demo.brt;
+package ACSI.demo.REST.brt;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

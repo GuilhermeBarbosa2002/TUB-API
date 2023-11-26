@@ -1,11 +1,9 @@
-package ACSI.demo.student;
+package ACSI.demo.REST.student;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.beans.BeanProperty;
 import java.time.LocalDate;
 import java.util.List;
 
