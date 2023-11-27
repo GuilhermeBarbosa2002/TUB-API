@@ -8,7 +8,7 @@ public class KafkaListeners {
 
     @KafkaListener(
             topics = "amigoscode", groupId = "groupId")
-    void listener(String data) {
-        System.out.println("Listener received " + data + " <3");
+    void listener(Object data) {
+        System.out.println("Listener received " + data.toString() + " <3");
     }
 }

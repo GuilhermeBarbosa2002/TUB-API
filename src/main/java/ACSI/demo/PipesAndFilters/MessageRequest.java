@@ -1,5 +1,5 @@
 package ACSI.demo.PipesAndFilters;
 
-public record MessageRequest(String massage) {
+public record MessageRequest(Object massage) {
 
 }
