@@ -18,6 +18,6 @@ public class MessageController {
 
     @PostMapping
     public void publish(@RequestBody MessageRequest request) {
-        kafkaTemplate.send("amigoscode", request.massage() + " pelo controller");
+        kafkaTemplate.send("amigoscode", request.massage() + " Pelo controller");
     }
 }
