@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/messages")
 public class MessageController {
-
+    //Boas
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public MessageController(KafkaTemplate<String, String> kafkaTemplate) {
