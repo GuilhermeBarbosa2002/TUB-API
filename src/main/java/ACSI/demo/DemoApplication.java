@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 
-import java.util.HashMap;
-
 @SpringBootApplication
 
 public class DemoApplication {
@@ -19,13 +17,14 @@ public class DemoApplication {
 
 	@Bean
     CommandLineRunner commandLineRunnerr(KafkaTemplate<String, Object> kafkaTemplate) {
+        Produtor produtor = new Produtor(kafkaTemplate);
+
 		return args -> {
 			for (int i = 0; i < 100; i++) {
-				kafkaTemplate.send("amigoscode", "raul : " + i);
+                // kafkaTemplate.send("amigoscode", "raul : " + i);
 			}
-			Produtor produz = new Produtor();
-			kafkaTemplate.send("amigoscode", produz.getCoordinates());
-		};
+
+        };
 	}
 
 

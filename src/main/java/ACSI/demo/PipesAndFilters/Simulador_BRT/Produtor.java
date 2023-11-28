@@ -2,18 +2,42 @@ package ACSI.demo.PipesAndFilters.Simulador_BRT;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-@RestController
-@RequestMapping("/api")
+import java.util.Timer;
+import java.util.TimerTask;
+
+@Component
+
 public class Produtor {
 
-    @GetMapping("/coordinates")
-    public ResponseEntity<String> getCoordinates() {
+    private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final String lastLocationJson = "";
+    private String currentLocationJson;
+
+    @Autowired
+
+    public Produtor(KafkaTemplate<String, Object> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+
+        // Inicia o timer para executar a tarefa a cada 5 segundos
+        Timer timer = new Timer(true);
+        timer.scheduleAtFixedRate(new LocationUpdateTask(), 0, 5000);
+
+    }
+
+
+    private class LocationUpdateTask extends TimerTask {
+        @Override
+        public void run() {
+            updateLocation();
+        }
+    }
+
+    public void updateLocation() {
         String apiUrl = "https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType==bus&limit=1000";
 
         // Fazendo uma chamada à API e obtendo os dados como String
@@ -26,7 +50,8 @@ public class Produtor {
         try {
             jsonNode = objectMapper.readTree(apiResponse);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Erro ao analisar JSON");
+            // Lidar com erros ao analisar JSON
+            return;
         }
 
         // Iterando sobre as entidades para encontrar a entidade com o ID desejado
@@ -41,15 +66,16 @@ public class Produtor {
                 double latitude = coordinatesNode.get(1).asDouble();  // Índice 1 para latitude
                 double longitude = coordinatesNode.get(0).asDouble(); // Índice 0 para longitude
 
-                // Agora você tem latitude e longitude, e pode fazer o que quiser com elas
-                // Neste exemplo, eu só estou retornando uma string com as coordenadas
-                String result = "Latitude: " + latitude + ", Longitude: " + longitude;
+                // Criando o objeto Location com as coordenadas
+                Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", latitude, longitude, 191);
 
-                return ResponseEntity.ok(result);
+
+                kafkaTemplate.send("amigoscode", currentLocationJson);
+
+
+                // Não é necessário continuar procurando, pois encontramos a entidade desejada
+                break;
             }
         }
-
-        // Caso o ID desejado não seja encontrado
-        return ResponseEntity.status(404).body("Entidade não encontrada para o ID especificado");
     }
 }
