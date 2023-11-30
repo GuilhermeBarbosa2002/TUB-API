@@ -75,7 +75,7 @@ public class Produtor {
 
 
                 // Não é necessário continuar procurando, pois encontramos a entidade desejada
-                break;
+
             }
 
             if ("urn:ngsi-ld:Vehicle:porto:stcp:bus:2142".equals(entityId)) {
@@ -94,7 +94,7 @@ public class Produtor {
 
 
                 // Não é necessário continuar procurando, pois encontramos a entidade desejada
-                break;
+
             }
 
         }
