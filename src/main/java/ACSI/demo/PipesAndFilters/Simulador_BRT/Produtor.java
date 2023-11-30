@@ -66,8 +66,9 @@ public class Produtor {
                 double latitude = coordinatesNode.get(1).asDouble();  // Índice 1 para latitude
                 double longitude = coordinatesNode.get(0).asDouble(); // Índice 0 para longitude
 
+
                 // Criando o objeto Location com as coordenadas
-                Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", latitude, longitude, 191);
+                Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", latitude, longitude, 3347);
 
 
                 kafkaTemplate.send("amigoscode", currentLocationJson);
@@ -76,6 +77,26 @@ public class Produtor {
                 // Não é necessário continuar procurando, pois encontramos a entidade desejada
                 break;
             }
+
+            if ("urn:ngsi-ld:Vehicle:porto:stcp:bus:2142".equals(entityId)) {
+                // Extraindo latitude e longitude do JSON
+                JsonNode locationNode = entityNode.path("location");
+                JsonNode coordinatesNode = locationNode.path("value").path("coordinates");
+                double latitude = coordinatesNode.get(1).asDouble();  // Índice 1 para latitude
+                double longitude = coordinatesNode.get(0).asDouble(); // Índice 0 para longitude
+
+
+                // Criando o objeto Location com as coordenadas
+                Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", latitude, longitude, 2142);
+
+
+                kafkaTemplate.send("amigoscode", currentLocationJson);
+
+
+                // Não é necessário continuar procurando, pois encontramos a entidade desejada
+                break;
+            }
+
         }
     }
 }
