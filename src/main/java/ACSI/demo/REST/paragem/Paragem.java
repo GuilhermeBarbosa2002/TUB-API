@@ -1,9 +1,6 @@
 package ACSI.demo.REST.paragem;
 
-import ACSI.demo.REST.rota.Rota;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 @Table
@@ -26,8 +23,6 @@ public class Paragem {
     private String Latitude;
     private String Longitude;
 
-    @ManyToMany(mappedBy = "paragens")
-    private List<Rota> rotas;
 
     public Paragem() {
 

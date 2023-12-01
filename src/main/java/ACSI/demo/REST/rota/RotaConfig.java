@@ -12,6 +12,7 @@ import java.util.List;
 public class RotaConfig {
 
     @Bean
+
     CommandLineRunner inicializarRotas(RotaRepository rotaRepository, ParagemRepository paragemRepository) {
         return args -> {
             // Criar paragens

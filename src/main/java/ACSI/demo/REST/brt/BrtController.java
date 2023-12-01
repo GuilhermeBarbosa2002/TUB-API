@@ -16,7 +16,13 @@ public class BrtController {
         this.brtService = brtService;
     }
 
- @GetMapping
+    @GetMapping(path = "{brtId}")
+    public Brt getBrtById(@PathVariable("brtId") Long id) {
+        return brtService.getBrtById(id);
+    }
+
+
+    @GetMapping
  public List<Brt> getBrts(){
    return brtService.getBrts();
  }

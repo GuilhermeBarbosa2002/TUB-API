@@ -15,6 +15,7 @@ public class RotaController {
         this.rotaService = rotaService;
     }
 
+
     @GetMapping
     public List<Rota> getRotas() {
         return rotaService.getRotas();

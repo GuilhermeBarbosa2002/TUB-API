@@ -75,4 +75,12 @@ public class BrtService {
         Matcher matcher =  pattern.matcher(matricula);
         return matcher.find();
     }
+
+    public Brt getBrtById(Long id) {
+        Brt existBrt = brtRepository.findById(id).orElseThrow(() -> new IllegalStateException("brt not found"));
+
+
+        return existBrt;
+
+    }
 }

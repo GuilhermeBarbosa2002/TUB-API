@@ -1,8 +1,10 @@
 package ACSI.demo.REST.brt;
 
+import ACSI.demo.REST.camara.Camara;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table
@@ -21,6 +23,14 @@ public class Brt {
     private String matricula;
     private LocalDate dataRegisto;
     private Integer capacidade;
+
+    @OneToMany
+    @JoinTable(
+            name = "brt_camara",
+            joinColumns = @JoinColumn(name = "brt_id"),
+            inverseJoinColumns = @JoinColumn(name = "camara_id")
+    )
+    private List<Camara> camaras;
 
     public Long getId() {
         return id;
@@ -54,16 +64,20 @@ public class Brt {
         this.capacidade = capacidade;
     }
 
-    public Brt(Long id, String matricula, LocalDate dataRegisto, Integer capacidade) {
-        this.id = id;
-        this.matricula = matricula;
-        this.dataRegisto = dataRegisto;
-        this.capacidade = capacidade;
+
+    public List<Camara> getCamaras() {
+        return camaras;
     }
-    public Brt( String matricula, LocalDate dataRegisto, Integer capacidade) {
+
+    public void setCamaras(List<Camara> camaras) {
+        this.camaras = camaras;
+    }
+
+    public Brt(String matricula, LocalDate dataRegisto, Integer capacidade, List<Camara> camaras) {
         this.matricula = matricula;
         this.dataRegisto = dataRegisto;
         this.capacidade = capacidade;
+        this.camaras = camaras;
     }
 
     public Brt() {
