@@ -37,7 +37,7 @@ public class ViagemConfig {
             Rota rota = new Rota("Rota dos Arcos", null, List.of(paragem1, paragem2, paragem3, paragem4, paragem5));
             rotaRepository.save(rota);
 
-            Motorista motorista = new Motorista("Ze", "ze@gmail.com", "253930664", "918048445", LocalDate.of(1983, 05, 31));
+            Motorista motorista = new Motorista("Ze", "ze@gmail.com", "253930664", "918048445", LocalDate.of(1983, 5, 31));
             motoristaRepository.save(motorista);
 
             Camara camara1 = new Camara("ModeloX123", "ABC123", LocalDate.now(), "MarcaA", "1920x1080", EstadoCamara.DEFEITUOSA);
