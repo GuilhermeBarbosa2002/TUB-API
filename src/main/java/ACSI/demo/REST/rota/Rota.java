@@ -1,6 +1,7 @@
 package ACSI.demo.REST.rota;
 
 import ACSI.demo.REST.paragem.Paragem;
+import ACSI.demo.REST.viagem.Viagem;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -24,6 +25,8 @@ public class Rota {
     @Column(nullable = false, unique = true)
     private String nome;
 
+    @OneToOne(mappedBy = "rota")
+    private Viagem viagem;
     @ElementCollection
     private List<LocalDate> horario;
 

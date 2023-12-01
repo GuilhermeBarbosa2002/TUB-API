@@ -1,5 +1,6 @@
 package ACSI.demo.REST.motorista;
 
+import ACSI.demo.REST.viagem.Viagem;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -22,7 +23,8 @@ public class Motorista {
 
     @Column(nullable = false, unique = true)
     private String nome;
-
+    @OneToOne(mappedBy = "motorista")
+    private Viagem viagem;
     private String email;
     private String numerocc;
     private String telefone;

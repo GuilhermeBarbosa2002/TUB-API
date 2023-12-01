@@ -24,16 +24,14 @@ public class Viagem {
     private LocalDateTime data;
 
     private EstadoViagem estado;
-    @OneToMany
-    @JoinTable(
-            name = "brt_camara",
-            joinColumns = @JoinColumn(name = "brt_id"),
-            inverseJoinColumns = @JoinColumn(name = "camara_id")
-    )
+    @OneToOne
+    @JoinColumn(name = "rota_id")
     private Rota rota;
-
+    @OneToOne
+    @JoinColumn(name = "motorista_id")
     private Motorista motorista;
-
+    @OneToOne
+    @JoinColumn(name = "brt_id")
     private Brt brt;
 
     public Viagem() {

@@ -1,6 +1,7 @@
 package ACSI.demo.REST.brt;
 
 import ACSI.demo.REST.camara.Camara;
+import ACSI.demo.REST.viagem.Viagem;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -23,7 +24,8 @@ public class Brt {
     private String matricula;
     private LocalDate dataRegisto;
     private Integer capacidade;
-
+    @OneToOne(mappedBy = "brt")
+    private Viagem viagem;
     @OneToMany
     @JoinTable(
             name = "brt_camara",
