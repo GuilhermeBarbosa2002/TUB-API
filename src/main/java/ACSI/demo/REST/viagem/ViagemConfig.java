@@ -48,6 +48,7 @@ public class ViagemConfig {
             brtRepository.save(brt);
 
             Viagem viagem = new Viagem(LocalDateTime.of(2023, 11, 25, 13, 22), EstadoViagem.FUNCIONAR, rota, motorista, brt);
+            viagemRepository.save(viagem);
         };
     }
 }
