@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/messages")
+@RequestMapping("api/v1/messages/")
 public class MessageController {
     //Boas
     private final KafkaTemplate<String, Object> kafkaTemplate;
@@ -18,7 +18,8 @@ public class MessageController {
     }
 
     @PostMapping
-    public void publish(@NonNull @RequestBody MessageRequest request) {
-        kafkaTemplate.send("amigoscode", request + " Pelo controller");
+    public void publish(@NonNull @RequestBody Localizacao localizacao) {
+        Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", localizacao.getLatitude(), localizacao.getLongitude(), localizacao.getBrt_id());
+        kafkaTemplate.send("amigoscode", currentLocationJson);
     }
 }
