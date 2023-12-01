@@ -20,6 +20,7 @@ public class MessageController {
     @PostMapping
     public void publish(@NonNull @RequestBody Localizacao localizacao) {
         Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", localizacao.getLatitude(), localizacao.getLongitude(), localizacao.getBrt_id());
+        //ir buscar os dados todos e mandar por kafka!
         kafkaTemplate.send("amigoscode", currentLocationJson);
     }
 }
