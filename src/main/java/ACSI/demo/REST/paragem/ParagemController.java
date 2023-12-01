@@ -27,7 +27,7 @@ public class ParagemController {
     }
 
     @PostMapping
-    public void registarNewBrt(@RequestBody Paragem paragem) {
+    public void registarNewParagem(@RequestBody Paragem paragem) {
         paragemService.addNewParagem(paragem);
     }
 
