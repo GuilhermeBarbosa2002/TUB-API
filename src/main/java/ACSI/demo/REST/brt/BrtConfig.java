@@ -10,7 +10,7 @@ import java.util.List;
 @Configuration
 public class BrtConfig {
     @Bean
-    CommandLineRunner commandLineRunner1(BrtRepository repository){
+    CommandLineRunner inicializarBrt(BrtRepository repository) {
         return args -> {
             Brt brt1 = new Brt("34-MO-PQ", LocalDate.parse("2002-02-22"),20);
             Brt brt2 = new Brt("29-EE-11",LocalDate.parse("2005-05-05"),21);
