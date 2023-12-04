@@ -2,6 +2,7 @@ package ACSI.demo.REST.viagem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +40,7 @@ public class ViagemService {
 
         viagemRepository.deleteById(id);
     }
-
+    @Transactional
     public void uptadeViagem(Long id, Viagem viagem) {
         Viagem existingViagem = viagemRepository.findById(id).orElseThrow(() -> new IllegalStateException("Viagem not found"));
 

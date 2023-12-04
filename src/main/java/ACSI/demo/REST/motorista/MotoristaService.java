@@ -2,6 +2,7 @@ package ACSI.demo.REST.motorista;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ public class MotoristaService {
     public MotoristaService(MotoristaRepository motoristaRepository) {
         this.motoristaRepository = motoristaRepository;
     }
-
+    @Transactional
     public void uptadeMotorista(Long id, Motorista motorista) {
         Motorista existingMotorista = motoristaRepository.findById(id).orElseThrow(() -> new IllegalStateException("Motorista not found"));
 

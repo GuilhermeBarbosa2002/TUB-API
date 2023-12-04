@@ -25,8 +25,6 @@ public class Rota {
     @Column(nullable = false, unique = true)
     private String nome;
 
-    @OneToOne(mappedBy = "rota")
-    private Viagem viagem;
     @ElementCollection
     private List<LocalDate> horario;
 
