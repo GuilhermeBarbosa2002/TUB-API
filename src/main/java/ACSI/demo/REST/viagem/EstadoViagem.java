@@ -1,7 +1,9 @@
 package ACSI.demo.REST.viagem;
 
 public enum EstadoViagem {
-    FUNCIONAR,
-    MANUTENCAO,
-    DEFEITUOSA
+    EM_VIAGEM,
+    TERMINADO,
+    ACIDENTE,
+
+
 }

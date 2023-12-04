@@ -7,6 +7,8 @@ import ACSI.demo.REST.camara.CamaraRepository;
 import ACSI.demo.REST.camara.EstadoCamara;
 import ACSI.demo.REST.motorista.Motorista;
 import ACSI.demo.REST.motorista.MotoristaRepository;
+import ACSI.demo.REST.movimento.Movimento;
+import ACSI.demo.REST.movimento.MovimentoRepository;
 import ACSI.demo.REST.paragem.Paragem;
 import ACSI.demo.REST.paragem.ParagemRepository;
 import ACSI.demo.REST.rota.Rota;
@@ -22,7 +24,7 @@ import java.util.List;
 @Configuration
 public class ViagemConfig {
     @Bean
-    CommandLineRunner inicializarViagem(ViagemRepository viagemRepository, ParagemRepository paragemRepository, RotaRepository rotaRepository, MotoristaRepository motoristaRepository, CamaraRepository camaraRepository, BrtRepository brtRepository) {
+    CommandLineRunner inicializarViagem(ViagemRepository viagemRepository, ParagemRepository paragemRepository, RotaRepository rotaRepository, MotoristaRepository motoristaRepository, CamaraRepository camaraRepository, BrtRepository brtRepository, MovimentoRepository movimentoRepository) {
         return args -> {
             Paragem paragem1 = new Paragem("Ponte de Prado", "41.594079223736614", "-8.459348645833831");
             Paragem paragem2 = new Paragem("Merelim S. Roque", "41.58262647285251", "-8.467006107577262 ");
@@ -47,7 +49,11 @@ public class ViagemConfig {
             Brt brt = new Brt("34-MO-PQ", LocalDate.parse("2002-02-22"), 20, List.of(camara1, camara2));
             brtRepository.save(brt);
 
-            Viagem viagem = new Viagem(LocalDateTime.of(2023, 11, 25, 13, 22), EstadoViagem.FUNCIONAR, rota, motorista, brt);
+
+            Movimento movimento = new Movimento(paragem1, 12L, 12L,11.2);
+            movimentoRepository.save(movimento);
+            Viagem viagem = new Viagem(LocalDateTime.of(2023, 11, 25, 13, 22), EstadoViagem.EM_VIAGEM, rota, motorista, brt, 12L, 12L, List.of(movimento));
+
             viagemRepository.save(viagem);
         };
     }

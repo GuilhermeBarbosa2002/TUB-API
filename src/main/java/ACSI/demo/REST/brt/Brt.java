@@ -24,8 +24,6 @@ public class Brt {
     private String matricula;
     private LocalDate dataRegisto;
     private Integer capacidade;
-    @OneToOne(mappedBy = "brt")
-    private Viagem viagem;
     @OneToMany
     @JoinTable(
             name = "brt_camara",

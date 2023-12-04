@@ -1,9 +1,10 @@
-package ACSI.demo.REST.paragem;
+package ACSI.demo.REST.camara;
 
 import ACSI.demo.REST.camara.Camara;
 import ACSI.demo.REST.camara.CamaraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,10 +43,12 @@ public class CamaraService {
         camaraRepository.deleteById(id);
     }
 
-    public void uptadeCamara(Long id, Camara paragem) {
+    @Transactional
+    public void uptadeCamara(Long id, Camara camara) {
         Camara existingCamara = camaraRepository.findById(id).orElseThrow(() -> new IllegalStateException("Camara not found"));
 
-        existingCamara.setEstado(paragem.getEstado());
+
+        existingCamara.setEstado(camara.getEstado());
 
 
     }

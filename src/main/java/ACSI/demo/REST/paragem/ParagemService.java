@@ -2,6 +2,7 @@ package ACSI.demo.REST.paragem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +40,7 @@ public class ParagemService {
 
         paragemRepository.deleteById(id);
     }
-
+    @Transactional
     public void uptadeParagem(Long id, Paragem paragem) {
         Paragem existingParagem = paragemRepository.findById(id).orElseThrow(() -> new IllegalStateException("Paragem not found"));
 

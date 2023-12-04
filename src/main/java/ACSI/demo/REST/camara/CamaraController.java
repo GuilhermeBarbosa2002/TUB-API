@@ -1,7 +1,7 @@
 package ACSI.demo.REST.camara;
 
 
-import ACSI.demo.REST.paragem.CamaraService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

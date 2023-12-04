@@ -2,10 +2,12 @@ package ACSI.demo.REST.viagem;
 
 import ACSI.demo.REST.brt.Brt;
 import ACSI.demo.REST.motorista.Motorista;
+import ACSI.demo.REST.movimento.Movimento;
 import ACSI.demo.REST.rota.Rota;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table
@@ -24,25 +26,65 @@ public class Viagem {
     private LocalDateTime data;
 
     private EstadoViagem estado;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "rota_id")
     private Rota rota;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "motorista_id")
     private Motorista motorista;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "brt_id")
     private Brt brt;
+
+
+    private Long totalPessoas;
+
+    private Long atualPessoas;
+
+    @OneToMany
+    @JoinTable(
+            name = "viagem_movimento",
+            joinColumns = @JoinColumn(name = "viagem_id"),
+            inverseJoinColumns = @JoinColumn(name = "movimento_id")
+    )
+    private List<Movimento> movimentos;
 
     public Viagem() {
     }
 
-    public Viagem(LocalDateTime data, EstadoViagem estado, Rota rota, Motorista motorista, Brt brt) {
+    public Viagem(LocalDateTime data, EstadoViagem estado, Rota rota, Motorista motorista, Brt brt, Long totalPessoas, Long atualPessoas, List<Movimento> movimentos) {
         this.data = data;
         this.estado = estado;
         this.rota = rota;
         this.motorista = motorista;
         this.brt = brt;
+        this.totalPessoas = totalPessoas;
+        this.atualPessoas = atualPessoas;
+        this.movimentos = movimentos;
+    }
+
+    public Long getTotalPessoas() {
+        return totalPessoas;
+    }
+
+    public void setTotalPessoas(Long totalPessoas) {
+        this.totalPessoas = totalPessoas;
+    }
+
+    public Long getAtualPessoas() {
+        return atualPessoas;
+    }
+
+    public void setAtualPessoas(Long atualPessoas) {
+        this.atualPessoas = atualPessoas;
+    }
+
+    public List<Movimento> getMovimentos() {
+        return movimentos;
+    }
+
+    public void setMovimentos(List<Movimento> movimentos) {
+        this.movimentos = movimentos;
     }
 
     public Long getId() {
