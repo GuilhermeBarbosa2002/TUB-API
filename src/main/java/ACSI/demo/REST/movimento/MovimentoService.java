@@ -1,5 +1,6 @@
 package ACSI.demo.REST.movimento;
 
+import ACSI.demo.PipesAndFilters.KafkaListeners;
 import ACSI.demo.REST.brt.Brt;
 import ACSI.demo.REST.brt.BrtRepository;
 import ACSI.demo.REST.camara.Camara;
@@ -9,7 +10,9 @@ import ACSI.demo.REST.paragem.ParagemRepository;
 import ACSI.demo.REST.viagem.EstadoViagem;
 import ACSI.demo.REST.viagem.Viagem;
 import ACSI.demo.REST.viagem.ViagemRepository;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,16 +56,40 @@ public class MovimentoService {
 
         System.out.println("\n \n\n\n\n " + viagem.getRota().getNome() + " \n \\n\\n\\n\\n");
 
+        for (Paragem p: viagem.getRota().getParagens()) {
+            String latitudeParagem = p.getLatitude();
+            String longitudeParagem = p.getLatitude();
+
+            String latitudeParagemSumarizada = latitudeParagem.substring(0, Math.min(latitudeParagem.length(), 8));
+            String longitudeParagemSumarizada = longitudeParagem.substring(0, Math.min(longitudeParagem.length(), 8));
+
+            String latitudeCamara = movimentoCamara.getLatitude();
+            String longitudeCamara = movimentoCamara.getLatitude();
+
+//            String latitudeCamaraSumarizada = latitudeCamara.substring(0, Math.min(latitudeCamara.length(), 8));
+//            String longitudeCamaraSumarizada = longitudeCamara.substring(0, Math.min(longitudeCamara.length(), 8));
+
+
+
+
+            System.out.println("->-> " + latitudeParagemSumarizada + " ->-> " + longitudeParagemSumarizada);
+
+        }
+        viagem.getRota().getParagens();
 
 
         //ir buscar a paragem (de alguma forma, não importa como ajaajaa?)
+
+
         //ir buscar o tempo de paragem, de alguma forma tambem
+
+
         //ir à viagem e adicionar o movimento à sua lista
 
 
 
 
-        Movimento movimento = new Movimento(null, movimentoCamara.getEntradaPassageiros(), movimentoCamara.getSaidaPassageiros(), 12.55);
+        Movimento movimento = new Movimento(null,movimentoCamara.getEntradaPassageiros(), movimentoCamara.getSaidaPassageiros(), 12.55);
 //
         movimentoRepository.save(movimento);
 
@@ -99,10 +126,9 @@ public class MovimentoService {
 
     public Movimento getMovimentoById(Long id) {
         Movimento existingMovimento = movimentoRepository.findById(id).orElseThrow(() -> new IllegalStateException("Movimento not found"));
-
-
         return existingMovimento;
 
     }
+
 
 }

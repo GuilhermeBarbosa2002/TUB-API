@@ -62,6 +62,7 @@ public class BrtService {
         }
 
         existingBRT.setCapacidade(brt.getCapacidade());
+
     }
 
     public boolean isMatriculaRegex(String matricula) {
@@ -81,6 +82,16 @@ public class BrtService {
 
 
         return existBrt;
+
+    }
+
+    @Transactional
+    public void updateLocalizacao(Long id, String latitude, String longitude){
+        System.out.println("---------------------------   " + id + "--------------");
+        Brt existingBRT = brtRepository.findById(id).orElseThrow(() -> new IllegalStateException("BRT not found"));
+
+        existingBRT.setLatitude(latitude);
+        existingBRT.setLongitude(longitude);
 
     }
 }

@@ -24,6 +24,10 @@ public class Brt {
     private String matricula;
     private LocalDate dataRegisto;
     private Integer capacidade;
+
+    private String latitude;
+
+    private String longitude;
     @OneToMany
     @JoinTable(
             name = "brt_camara",
@@ -73,11 +77,29 @@ public class Brt {
         this.camaras = camaras;
     }
 
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
     public Brt(String matricula, LocalDate dataRegisto, Integer capacidade, List<Camara> camaras) {
         this.matricula = matricula;
         this.dataRegisto = dataRegisto;
         this.capacidade = capacidade;
         this.camaras = camaras;
+        this.latitude = null;
+        this.longitude = null;
     }
 
     public Brt() {

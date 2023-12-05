@@ -1,9 +1,12 @@
 package ACSI.demo.PipesAndFilters;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Localizacao {
+    @JsonProperty("brt")
     private long brt;
-    private double latitude;
-    private double longitude;
+    private String latitude;
+    private String longitude;
 
     public long getBrt_id() {
         return brt;
@@ -13,23 +16,23 @@ public class Localizacao {
         this.brt = brt;
     }
 
-    public double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public Localizacao(long brt_id, double latitude, double longitude) {
+    public Localizacao(long brt_id, String latitude, String longitude) {
         this.brt = brt_id;
         this.latitude = latitude;
         this.longitude = longitude;

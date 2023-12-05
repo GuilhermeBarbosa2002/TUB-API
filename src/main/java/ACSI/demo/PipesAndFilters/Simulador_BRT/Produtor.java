@@ -55,48 +55,53 @@ public class Produtor {
         }
 
         // Iterando sobre as entidades para encontrar a entidade com o ID desejado
+        int i = 1;
         for (JsonNode entityNode : jsonNode) {
             String entityId = entityNode.path("id").asText();
-
-            // Verificando se a entidade tem o ID desejado
-            if ("urn:ngsi-ld:Vehicle:porto:stcp:bus:3347".equals(entityId)) {
-                // Extraindo latitude e longitude do JSON
-                JsonNode locationNode = entityNode.path("location");
-                JsonNode coordinatesNode = locationNode.path("value").path("coordinates");
-                double latitude = coordinatesNode.get(1).asDouble();  // Índice 1 para latitude
-                double longitude = coordinatesNode.get(0).asDouble(); // Índice 0 para longitude
-
-
-                // Criando o objeto Location com as coordenadas
-                Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", latitude, longitude, 3347);
+            if(i==1) {
+                // Verificando se a entidade tem o ID desejado
+                if ("urn:ngsi-ld:Vehicle:porto:stcp:bus:3347".equals(entityId)) {
+                    // Extraindo latitude e longitude do JSON
+                    JsonNode locationNode = entityNode.path("location");
+                    JsonNode coordinatesNode = locationNode.path("value").path("coordinates");
+                    double latitude = coordinatesNode.get(1).asDouble();  // Índice 1 para latitude
+                    double longitude = coordinatesNode.get(0).asDouble(); // Índice 0 para longitude
 
 
-                kafkaTemplate.send("amigoscode", currentLocationJson);
+                    // Criando o objeto Location com as coordenadas
+                    Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", latitude, longitude, 1);
+
+                    i=i-1;
+                    kafkaTemplate.send("amigoscode", currentLocationJson);
 
 
-                // Não é necessário continuar procurando, pois encontramos a entidade desejada
+                    // Não é necessário continuar procurando, pois encontramos a entidade desejada
 
+                }
             }
+            else
+            {
+                if ("urn:ngsi-ld:Vehicle:porto:stcp:bus:2142".equals(entityId)) {
 
-            if ("urn:ngsi-ld:Vehicle:porto:stcp:bus:2142".equals(entityId)) {
-                // Extraindo latitude e longitude do JSON
-                JsonNode locationNode = entityNode.path("location");
-                JsonNode coordinatesNode = locationNode.path("value").path("coordinates");
-                double latitude = coordinatesNode.get(1).asDouble();  // Índice 1 para latitude
-                double longitude = coordinatesNode.get(0).asDouble(); // Índice 0 para longitude
-
-
-                // Criando o objeto Location com as coordenadas
-                Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", latitude, longitude, 2142);
-
-
-                kafkaTemplate.send("amigoscode", currentLocationJson);
+                    System.err.println("TOU AQUIIIIIIIIII");
+                    // Extraindo latitude e longitude do JSON
+                    JsonNode locationNode = entityNode.path("location");
+                    JsonNode coordinatesNode = locationNode.path("value").path("coordinates");
+                    double latitude = coordinatesNode.get(1).asDouble();  // Índice 1 para latitude
+                    double longitude = coordinatesNode.get(0).asDouble(); // Índice 0 para longitude
 
 
-                // Não é necessário continuar procurando, pois encontramos a entidade desejada
+                    // Criando o objeto Location com as coordenadas
+                    Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", latitude, longitude, 1);
 
+                    i=i+1;
+                    kafkaTemplate.send("amigoscode", currentLocationJson);
+
+
+                    // Não é necessário continuar procurando, pois encontramos a entidade desejada
+
+                }
             }
-
         }
     }
 }
