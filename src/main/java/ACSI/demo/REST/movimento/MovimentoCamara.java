@@ -2,6 +2,8 @@ package ACSI.demo.REST.movimento;
 
 import jakarta.persistence.Column;
 
+import java.time.LocalDateTime;
+
 public class MovimentoCamara {
     private Long id_camera;
     private Long entradaPassageiros;
@@ -23,20 +25,12 @@ public class MovimentoCamara {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
-        return latitude;
+    public double getTempoParagem() {
+        return tempoParagem;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
+    public void setTempoParagem(double tempoParagem) {
+        this.tempoParagem = tempoParagem;
     }
 
     public Long getId_camera() {

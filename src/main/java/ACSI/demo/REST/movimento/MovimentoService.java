@@ -56,52 +56,37 @@ public class MovimentoService {
 
         System.out.println("\n \n\n\n\n " + viagem.getRota().getNome() + " \n \\n\\n\\n\\n");
 
+        String latitudeBrt= brt.getLatitude();
+        String longitudeBrt = brt.getLongitude();
+
+      String latitudeBrtSumarizada = latitudeBrt.substring(0, Math.min(latitudeBrt.length(), 8));
+      String longitudeBrtSumarizada = longitudeBrt.substring(0, Math.min(longitudeBrt.length(), 8));
+
+
         for (Paragem p: viagem.getRota().getParagens()) {
             String latitudeParagem = p.getLatitude();
-            String longitudeParagem = p.getLatitude();
+            String longitudeParagem = p.getLongitude();
 
             String latitudeParagemSumarizada = latitudeParagem.substring(0, Math.min(latitudeParagem.length(), 8));
             String longitudeParagemSumarizada = longitudeParagem.substring(0, Math.min(longitudeParagem.length(), 8));
 
-            String latitudeCamara = movimentoCamara.getLatitude();
-            String longitudeCamara = movimentoCamara.getLatitude();
+            System.out.println("Latitude : " + latitudeBrtSumarizada + " --- "  +latitudeParagemSumarizada);
+            System.out.println("Longitude : "  + longitudeParagemSumarizada + " --- "  +longitudeParagemSumarizada);
+            if(latitudeBrtSumarizada.equalsIgnoreCase(latitudeParagemSumarizada) && longitudeBrtSumarizada.equalsIgnoreCase(longitudeParagemSumarizada)){
+                Movimento movimento = new Movimento(p,movimentoCamara.getEntradaPassageiros(), movimentoCamara.getSaidaPassageiros(),movimentoCamara.getTempoParagem());
+                movimentoRepository.save(movimento);
+                viagem.getMovimentos().add(movimento);
 
-//            String latitudeCamaraSumarizada = latitudeCamara.substring(0, Math.min(latitudeCamara.length(), 8));
-//            String longitudeCamaraSumarizada = longitudeCamara.substring(0, Math.min(longitudeCamara.length(), 8));
+                viagem.setAtualPessoas(viagem.getAtualPessoas() + movimento.getEntradaPassageiros());
+                viagem.setAtualPessoas(viagem.getAtualPessoas() - movimento.getSaidaPassageiros());
 
+                viagem.setTotalPessoas(viagem.getTotalPessoas() + movimento.getEntradaPassageiros());
+                return;
+            }
 
-
-
-            System.out.println("->-> " + latitudeParagemSumarizada + " ->-> " + longitudeParagemSumarizada);
 
         }
-        viagem.getRota().getParagens();
-
-
-        //ir buscar a paragem (de alguma forma, não importa como ajaajaa?)
-
-
-        //ir buscar o tempo de paragem, de alguma forma tambem
-
-
-        //ir à viagem e adicionar o movimento à sua lista
-
-
-
-
-        Movimento movimento = new Movimento(null,movimentoCamara.getEntradaPassageiros(), movimentoCamara.getSaidaPassageiros(), 12.55);
-//
-        movimentoRepository.save(movimento);
-
-        viagem.getMovimentos().add(movimento);
-
-//        Optional<Movimento> paragemByNome = movimentoRepository.findById(movimento.getId());
-//
-//        if (paragemByNome.isPresent()) {
-//            throw new IllegalStateException("Ja existe uma Paragem com esse nome!");
-//        }
-//
-//        movimentoRepository.save(movimento);
+        throw new IllegalStateException("Paragem não encontrada");
     }
 
     public void deleteMovimento(Long id) {

@@ -32,22 +32,22 @@ public class Movimento {
 
     private double tempoParagem;
 
-    private LocalDateTime localDateTime;
+    private LocalDateTime tempo;
 
     public Movimento(Paragem paragem, Long entradaPassageiros, Long saidaPassageiros, double tempoParagem) {
         this.paragem = paragem;
         this.entradaPassageiros = entradaPassageiros;
         this.saidaPassageiros = saidaPassageiros;
         this.tempoParagem = tempoParagem;
-        this.localDateTime = LocalDateTime.now();
+        this.tempo = LocalDateTime.now();
     }
 
     public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+        return tempo;
     }
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+        this.tempo = localDateTime;
     }
 
     public Movimento() {
