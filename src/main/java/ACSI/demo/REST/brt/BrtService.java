@@ -48,23 +48,12 @@ public class BrtService {
         brtRepository.deleteById(id);
 
     }
-
     @Transactional
-    public void uptadeBrt(Long id,Brt brt){
-
+    public void uptadeBrt(Long id,Integer capacidade){
         Brt existingBRT = brtRepository.findById(id).orElseThrow(() -> new IllegalStateException("BRT not found"));
-
-        if(!brt.getMatricula().equals(existingBRT.getMatricula())){
-            throw new IllegalStateException(("Não podes alterar a matricula!"));
-        }
-        if(!brt.getDataRegisto().equals(existingBRT.getDataRegisto())){
-            throw new IllegalStateException(("Não podes alterar a data de Registo!"));
-        }
-
-        existingBRT.setCapacidade(brt.getCapacidade());
+        existingBRT.setCapacidade(capacidade);
 
     }
-
     public boolean isMatriculaRegex(String matricula) {
         // pattern:
         // \A                                    - início da string

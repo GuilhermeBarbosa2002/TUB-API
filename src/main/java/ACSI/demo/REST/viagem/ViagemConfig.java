@@ -44,7 +44,10 @@ public class ViagemConfig {
 
             Camara camara1 = new Camara("ModeloX123", "ABC123", LocalDate.now(), "MarcaA", "1920x1080", EstadoCamara.DEFEITUOSA);
             Camara camara2 = new Camara("ModeloX123", "ABC1234", LocalDate.now(), "MarcaA", "1920x1080", EstadoCamara.MANUTENCAO);
-            camaraRepository.saveAll(List.of(camara1, camara2));
+            Camara camara3 = new Camara("ModeloX123", "ABC12345", LocalDate.now(), "MarcaA", "1920x1080", EstadoCamara.DEFEITUOSA);
+            Camara camara4 = new Camara("ModeloX123", "ABC123456", LocalDate.now(), "MarcaA", "1920x1080", EstadoCamara.MANUTENCAO);
+            Camara camara5 = new Camara("ModeloX123", "ABC1234567", LocalDate.now(), "MarcaA", "1920x1080", EstadoCamara.MANUTENCAO);
+            camaraRepository.saveAll(List.of(camara1, camara2,camara3,camara4,camara5));
 
             Brt brt = new Brt("34-MO-PQ", LocalDate.parse("2002-02-22"), 20, List.of(camara1, camara2));
             brtRepository.save(brt);

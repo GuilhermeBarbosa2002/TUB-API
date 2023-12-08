@@ -36,7 +36,6 @@ public class Produtor {
             updateLocation();
         }
     }
-
     public void updateLocation() {
         String apiUrl = "https://broker.fiware.urbanplatform.portodigital.pt/v2/entities?q=vehicleType==bus&limit=1000";
 
@@ -72,8 +71,7 @@ public class Produtor {
                     Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", latitude, longitude, 1);
 
                     i=i-1;
-                    kafkaTemplate.send("amigoscode", currentLocationJson);
-
+                    kafkaTemplate.send("amigoscode", "Localizacao_"+currentLocationJson);
 
                     // Não é necessário continuar procurando, pois encontramos a entidade desejada
 
@@ -93,11 +91,11 @@ public class Produtor {
 
                     // Criando o objeto Location com as coordenadas
                     Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", latitude, longitude, 1);
-
-                    i=i+1;
-                    kafkaTemplate.send("amigoscode", currentLocationJson);
-
-
+                        kafkaTemplate.send("amigoscode", "Localizacao_" + currentLocationJson);
+                        kafkaTemplate.send("amigoscode", "Brt_Post_26-32-MV_2023-12-12_45_3_4");
+                        kafkaTemplate.send("amigoscode", "Brt_Put_1_63");
+                        kafkaTemplate.send("amigoscode", "Brt_Get_1");
+                        kafkaTemplate.send("amigoscode", "Brt_GetAll");
                     // Não é necessário continuar procurando, pois encontramos a entidade desejada
 
                 }

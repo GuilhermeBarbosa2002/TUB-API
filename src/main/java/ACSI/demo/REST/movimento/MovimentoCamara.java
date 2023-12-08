@@ -10,7 +10,7 @@ public class MovimentoCamara {
     private Long saidaPassageiros;
 
     private String latitude;
-
+    private double tempoParagem;
     private String longitude;
 
     public MovimentoCamara() {

@@ -36,8 +36,8 @@ public class BrtController {
         brtService.deleteBrt(id);
     }
     @PutMapping(path = "{brtId}")
-    public void updateStudent(@PathVariable("brtId")Long id, @RequestBody Brt brt){
-        brtService.uptadeBrt(id,brt);
+    public void updateStudent(@PathVariable("brtId")Long id, @RequestBody Integer capacidade){
+        brtService.uptadeBrt(id,capacidade);
     }
 
 }
