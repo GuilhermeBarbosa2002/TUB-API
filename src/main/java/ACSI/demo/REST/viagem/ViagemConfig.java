@@ -36,7 +36,7 @@ public class ViagemConfig {
             paragemRepository.saveAll(List.of(paragem1, paragem2, paragem3, paragem4, paragem5));
 
             // Criar rota e associar paragens
-            Rota rota = new Rota("Rota dos Arcos", null, List.of(paragem1, paragem2, paragem3, paragem4, paragem5));
+            Rota rota = new Rota("Rota dos Arcos", null, List.of(paragem1, paragem2, paragem3, paragem4, paragem5),"C1",34);
             rotaRepository.save(rota);
 
             Motorista motorista = new Motorista("Ze", "ze@gmail.com", "253930664", "918048445", LocalDate.of(1983, 5, 31));

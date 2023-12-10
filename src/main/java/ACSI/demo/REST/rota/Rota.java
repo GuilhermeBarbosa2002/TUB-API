@@ -24,6 +24,24 @@ public class Rota {
 
     @Column(nullable = false, unique = true)
     private String nome;
+    private int preco;
+    private String coroa;
+
+    public int getPreco() {
+        return preco;
+    }
+
+    public void setPreco(int preco) {
+        this.preco = preco;
+    }
+
+    public String getCoroa() {
+        return coroa;
+    }
+
+    public void setCoroa(String coroa) {
+        this.coroa = coroa;
+    }
 
     @ElementCollection
     private List<LocalDate> horario;
@@ -73,9 +91,11 @@ public class Rota {
         // Construtor padrão necessário para JPA
     }
 
-    public Rota(String nome, List<LocalDate> horario, List<Paragem> paragens) {
+    public Rota(String nome, List<LocalDate> horario, List<Paragem> paragens,String coroa, Integer preco) {
         this.nome = nome;
         this.horario = horario;
         this.paragens = paragens;
+        this.coroa = coroa;
+        this.preco = preco;
     }
 }
