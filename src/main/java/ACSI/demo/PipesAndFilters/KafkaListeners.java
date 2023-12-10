@@ -22,20 +22,15 @@ public class KafkaListeners {
         this.brtService = brtService;
         this.camaraService = camaraService;
     }
-    @KafkaListener(topics = "amigoscode", groupId = "groupid")
-    void listener(ConsumerRecord<String, String> record) {
+    @KafkaListener(topics = "localizacao", groupId = "localizacaoid")
+    void listenerlocalizacao(ConsumerRecord<String, String> record) {
         String[] value = record.value().split("_");
-        switch (value[0]) {
-            case "Brt":
-                BrtCommandos(value);
-                break;
-            case "Localizacao":
-                LocalizacaoCommandos(value);
-                break;
-            default:
-                System.out.println("Comando não reconhecido: " + value[0]);
-                break;
-        }
+        LocalizacaoCommandos(value);
+    }
+    @KafkaListener(topics = "brt", groupId = "brtid")
+    void listenerbrt(ConsumerRecord<String, String> record) {
+        String[] value = record.value().split("_");
+        BrtCommandos(value);
     }
     private void BrtCommandos(String[] value) {
         switch (value[1]) {
