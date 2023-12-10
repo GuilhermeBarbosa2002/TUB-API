@@ -25,6 +25,7 @@ public class Rota {
     @Column(nullable = false, unique = true)
     private String nome;
     private int preco;
+
     private String coroa;
 
     public int getPreco() {

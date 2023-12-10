@@ -1,5 +1,6 @@
 package ACSI.demo.REST.titulo_de_viagem;
 
+import ACSI.demo.REST.coroa.Coroa;
 import ACSI.demo.REST.rota.Rota;
 import jakarta.persistence.*;
 
@@ -22,11 +23,29 @@ public class Titulo_De_Viagem {
     private Rota rota;
     private boolean Validado;
 
-    public Titulo_De_Viagem(Rota rota) {
+    @OneToOne
+    @JoinColumn(name="coroa_id")
+    private Coroa coroa;
+
+    public void setRota(Rota rota) {
         this.rota = rota;
     }
 
+    public Coroa getCoroa() {
+        return coroa;
+    }
+
+    public void setCoroa(Coroa coroa) {
+        this.coroa = coroa;
+    }
+
+    public Titulo_De_Viagem(Rota rota) {
+        this.rota = rota;
+        setValidado(false);
+    }
+
     public Titulo_De_Viagem() {
+        setValidado(false);
     }
 
     public Long getId() {
