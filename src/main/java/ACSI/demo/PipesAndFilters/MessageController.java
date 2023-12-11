@@ -27,7 +27,7 @@ public class MessageController {
         Object currentLocationJson = String.format("{\"latitude\": %s, \"longitude\": %s, \"brt\": %s}", localizacao.getLatitude(), localizacao.getLongitude(), localizacao.getBrt_id());
         //ir buscar os dados todos e mandar por kafka!
         brtService.updateLocalizacao(localizacao.getBrt_id(), localizacao.getLatitude(), localizacao.getLongitude());
-        kafkaTemplate.send("amigoscode", currentLocationJson);
+        kafkaTemplate.send("localizacao", currentLocationJson);
 
     }
 }

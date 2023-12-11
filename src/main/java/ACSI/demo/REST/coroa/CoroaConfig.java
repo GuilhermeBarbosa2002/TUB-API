@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class CoroaConfig {
 
     @Bean
-    CommandLineRunner inicializarCamara(CamaraRepository repository) {
+    CommandLineRunner inicializarCoroa(CoroaRepository repository) {
         return args -> {
 //            Paragem paragem1 = new Paragem("Ponte de Prado","41.594079223736614", "-8.459348645833831");
 //            Paragem paragem2 = new Paragem("Merelim S. Roque","41.58262647285251","-8.467006107577262 ");
